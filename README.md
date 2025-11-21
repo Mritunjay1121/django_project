@@ -20,48 +20,48 @@ A Django web application for machine learning predictions on marketing campaign 
 ### 1. Clone the Repository
 
 ```
-git clone repo
-cd project_name
+git clone https://github.com/Mritunjay1121/django_project.git
+cd django_project
 ```
 
 
-### 2. Create Virtual Environment
+### 2. Install UV : Python package and project manager
+
+Use curl to download the script and execute it with sh on macOS and Linux:
 
 ```
-python -m venv venv
+curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-### 3. Activate Virtual Environment
-
-**On macOS/Linux:**
+Use irm to download the script and execute it with iex:
 
 ```
-source venv/bin/activate
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 ```
+
+### 3.Initialize 'uv' and install requirements 
+
+```
+uv init
+```
+
+Then install requirements
+
+```
+uv add -r requirements.txt
+```
+
+### 4. Activate Virtual Environment
 
 
 **On Windows:**
 
 ```
-venv\Scripts\activate
+.venv\Scripts\activate
 ```
 
 
-### 4. Install Dependencies
-
-```
-pip install -r requirements.txt
-```
-
-
-### 5. Run Database Migrations (First Time Only)
-
-```
-python manage.py migrate
-```
-
-
-### 6. Run the Development Server
+### 5. Run the Development Server
 
 ```
 python manage.py runserver
