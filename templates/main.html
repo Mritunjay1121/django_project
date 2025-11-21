@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ML Application</title>
+
+    <style>
+        /* Reset some default styles */
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0f2027;
+            background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
+            color: #f0f0f0;
+            overflow-x: hidden;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: 0 0 5px #00f0ff;
+        }
+
+        hr {
+            width: 60%;
+            margin: 1.5rem auto;
+            border: 1px solid #00f0ff;
+            opacity: 0.3;
+        }
+
+        form {
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.05);
+            margin: 2rem auto;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        label {
+            font-weight: bold;
+            color: #00f0ff;
+        }
+
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background: transparent;
+            border: 1px solid #00f0ff;
+            border-radius: 6px;
+            color: #f0f0f0;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="file"]:hover {
+            background-color: rgba(0, 255, 255, 0.15);
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            margin-top: 1.5rem;
+            padding: 12px;
+            border: none;
+            border-radius: 20px;
+            background: #00f0ff;
+            color: #0f2027;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 0 15px #00f0ff;
+            transition: all 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #00c1cc;
+            color: #fff;
+            box-shadow: 0 0 25px #00c1cc;
+            transform: translateY(-2px);
+        }
+
+        p.error-message {
+            text-align: center;
+            color: #ff4d4d;
+            font-weight: bold;
+            margin-top: 1rem;
+            text-shadow: 0 0 4px #ff4d4d;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 2rem;
+            color: #00f0ff;
+            text-shadow: 0 0 8px #00f0ff;
+        }
+
+        /* Table container without horizontal scroll */
+        .table-container {
+            width: 95%;
+            max-width: 1400px;
+            margin: 2rem auto 4rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.3);
+            overflow: hidden;
+        }
+
+        /* Style the result table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(0, 255, 255, 0.1);
+            table-layout: fixed;
+        }
+
+        th, td {
+            padding: 8px 10px;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+            color: #e0ffff;
+            text-align: center;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            font-size: 0.85rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        th {
+            background-color: rgba(0,255,255,0.25);
+            font-weight: 700;
+            letter-spacing: 1px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        tr:hover {
+            background-color: rgba(0, 255, 255, 0.3);
+        }
+
+        /* Background animation - floating bubbles */
+        .bubbles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bubble {
+            position: absolute;
+            bottom: -150px;
+            background: rgba(0, 255, 255, 0.15);
+            border-radius: 50%;
+            animation: rise 20s linear infinite;
+            filter: drop-shadow(0 0 5px rgba(0,255,255,0.4));
+        }
+
+        @keyframes rise {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-120vh) scale(1.5);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>ML Django Application</h1>
+    <hr />
+
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="csv_file">Upload CSV file:</label><br />
+        <input type="file" name="csv_file" id="csv_file" accept=".csv" required /><br />
+        
+        <div style="margin-top: 1.5rem;">
+            <label style="display: block; margin-bottom: 0.5rem;">Train Model:</label>
+            <div style="display: flex; gap: 1rem; justify-content: center;">
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                    <input type="radio" name="train_model" value="yes" style="cursor: pointer;" />
+                    <span>Yes</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                    <input type="radio" name="train_model" value="no" checked style="cursor: pointer;" />
+                    <span>No</span>
+                </label>
+            </div>
+        </div>
+        
+        <input type="submit" value="Predict/Train" />
+    </form>
+
+    {% if error %}
+        <p class="error-message">{{ error }}</p>
+    {% endif %}
+
+    {% if training_complete %}
+        <div style="max-width: 600px; margin: 3rem auto; padding: 2rem; background: rgba(0, 255, 100, 0.1); border: 2px solid #00ff64; border-radius: 12px; text-align: center;">
+            <h2 style="color: #00ff64; text-shadow: 0 0 10px #00ff64; margin-bottom: 1rem;">✓ Training Completed Successfully!</h2>
+            <p style="font-size: 1.1rem; margin: 1rem 0;">Your model has been trained and saved.</p>
+            {% if r2_score %}
+                <p style="font-size: 1rem; color: #00f0ff;">R² Score: {{ r2_score|floatformat:4 }}</p>
+            {% endif %}
+            <p style="font-size: 1rem; margin-top: 1.5rem; color: #e0ffff;">You can now upload a CSV file to make predictions.</p>
+        </div>
+    {% endif %}
+
+    {% if results_table %}
+        <h2>Prediction Results:</h2>
+        <div class="table-container">
+            {{ results_table | safe }}
+        </div>
+    {% endif %}
+
+    <!-- Background bubbles animation -->
+    <div class="bubbles" id="bubbles"></div>
+
+    <script>
+        // Generate bubbles dynamically with JavaScript
+        const bubblesContainer = document.getElementById('bubbles');
+        for (let i = 0; i < 20; i++) {
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble';
+            bubble.style.width = (15 + i * 3) + 'px';
+            bubble.style.height = (15 + i * 3) + 'px';
+            bubble.style.left = ((i * 5) + 2) + '%';
+            bubble.style.animationDelay = (i * 1.2) + 's';
+            bubble.style.animationDuration = (15 + i * 2) + 's';
+            bubblesContainer.appendChild(bubble);
+        }
+    </script>
+
+</body>
+</html>
