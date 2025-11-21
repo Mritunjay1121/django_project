@@ -27,8 +27,8 @@ cd project_name
 
 ### 2. Create Virtual Environment
 
-```python -m venv venv
-
+```
+python -m venv venv
 ```
 
 ### 3. Activate Virtual Environment
