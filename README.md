@@ -97,3 +97,5 @@ To train a new model with your data. The model will be saved in path :
 savedmodels/randomforestmodel.joblib
 ```
 
+
+Deployed on EC2 : [Deployed](http://54.202.119.124/)
